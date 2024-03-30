@@ -28,7 +28,7 @@ const db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'Error de conexión a MongoDB:'));
 db.once('open', () => {
-  console.log('Conectado a la base de datos MongoDB');
+  console.log('MongoDB Atlas');
   // Puedes realizar operaciones en la base de datos aquí
 });
 
@@ -64,18 +64,18 @@ app.get('/api',(req, res) => {
   res.send('hola REST API')
 })
 
-app.use(require('./routes/components/components'));
+app.use(require('./routes/components/appControllers'));
 process.on('uncaughtException', function(err){
   console.log("Ocurrio un error: ", err);
   console.log(err.stack);
 })
 
-app.use(errorHadler);
+//app.use(errorHadler);
 
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended : false}))    
-app.use(require('./routes/components/components'))
+app.use(require('./routes/components/appControllers'))
 
 
 run().catch(console.dir);
